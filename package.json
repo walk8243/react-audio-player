@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "React用のオーディオプレイヤー",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "walk8243 <walk8243@gmail.com> (https://walk8243.xyz/)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.2.4"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.13",
+    "@types/react": "^19.2.14",
+    "typescript": "^6.0.2"
+  }
 }
