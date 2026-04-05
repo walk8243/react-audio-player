@@ -1,0 +1,13 @@
+{
+  "name": "@walk8243/react-audio-player",
+  "version": "1.0.0",
+  "description": "React用のオーディオプレイヤー",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "walk8243 <walk8243@gmail.com> (https://walk8243.xyz/)",
+  "license": "MIT"
+}
