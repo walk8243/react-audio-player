@@ -6,7 +6,7 @@ export interface AudioPlayerProps extends React.AudioHTMLAttributes<HTMLAudioEle
 
 export const AudioPlayer = forwardRef<HTMLAudioElement, AudioPlayerProps>(
   (props, ref) => {
-    return <audio ref={ref} {...props} />;
+    return <audio controls ref={ref} {...props} />;
   }
 );
 
