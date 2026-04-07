@@ -2,21 +2,26 @@
   "name": "@walk8243/react-audio-player",
   "version": "1.0.0",
   "description": "React用のオーディオプレイヤー",
-  "type": "commonjs",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/index.css",
+    "build": "npm run build:css && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "walk8243 <walk8243@gmail.com> (https://walk8243.xyz/)",
   "license": "MIT",
   "dependencies": {
+    "lucide-react": "^1.7.0",
     "react": "^19.2.4"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.13",
     "@types/react": "^19.2.14",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
     "typescript": "^6.0.2"
   },
   "workspaces": [
