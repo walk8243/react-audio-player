@@ -7,10 +7,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@walk8243/react-audio-player": "file:../walk8243-react-audio-player-1.0.0.tgz",
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "@walk8243/react-audio-player": "file:../"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

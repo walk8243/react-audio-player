@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react';
+import styles from './audio-player.module.css';
 
 export interface AudioPlayerProps extends React.AudioHTMLAttributes<HTMLAudioElement> {
   // カスタムプロパティが必要な場合はここに追加します
@@ -11,7 +12,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
   const ref = useRef<HTMLAudioElement>(null);
 
   // Audioタグのイベントをフックしつつ、親から渡されたハンドラも呼び出す
-  const { onTimeUpdate, onLoadedMetadata, onPlay, onPause, onVolumeChange, ...restProps } = props;
+  const { onTimeUpdate, onLoadedMetadata, onPlay, onPause, onVolumeChange, className, style, ...restProps } = props;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -72,72 +73,74 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full max-w-md p-4 bg-gray-900 text-gray-100 rounded-lg shadow-lg">
-      {/* 実体のaudioタグ（画面には表示しない） */}
-      <audio
-        ref={ref}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-        onPlay={handlePlay}
-        onPause={handlePause}
-        onVolumeChange={handleVolumeChange}
-        {...restProps}
-      />
+    <div className={className} style={style}>
+      <div className={styles.container}>
+        {/* 実体のaudioタグ（画面には表示しない） */}
+        <audio
+          ref={ref}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onPlay={handlePlay}
+          onPause={handlePause}
+          onVolumeChange={handleVolumeChange}
+          {...restProps}
+        />
 
-      {/* コントローラ */}
-      <div className="flex items-center justify-between">
-        {/* 左側：再生コントロール */}
-        <div className="flex items-center gap-4">
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onClick={() => skipTime(-10)}
-            aria-label="10秒巻き戻し"
-          >
-            <RotateCcw className="w-5 h-5" />
-          </button>
+        {/* コントローラ */}
+        <div className={styles.controls}>
+          {/* 左側：再生コントロール */}
+          <div className={styles.controlsLeft}>
+            <button
+              type="button"
+              className={styles.skipBackButton}
+              onClick={() => skipTime(-10)}
+              aria-label="10秒巻き戻し"
+            >
+              <RotateCcw className={styles.skipBackButtonIcon} />
+            </button>
 
-          <button
-            type="button"
-            className="p-3 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onClick={togglePlay}
-            aria-label={isPlaying ? '一時停止' : '再生'}
-          >
-            {isPlaying ? (
-              <Pause className="w-6 h-6 text-white leading-none" />
-            ) : (
-              <Play className="w-6 h-6 text-white leading-none ml-1" />
-            )}
-          </button>
+            <button
+              type="button"
+              className={styles.playButton}
+              onClick={togglePlay}
+              aria-label={isPlaying ? '一時停止' : '再生'}
+            >
+              {isPlaying ? (
+                <Pause className={styles.pauseButtonIcon} />
+              ) : (
+                <Play className={styles.playButtonIcon} />
+              )}
+            </button>
 
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onClick={() => skipTime(30)}
-            aria-label="30秒先送り"
-          >
-            <RotateCw className="w-5 h-5" />
-          </button>
-        </div>
+            <button
+              type="button"
+              className={styles.skipForwardButton}
+              onClick={() => skipTime(30)}
+              aria-label="30秒先送り"
+            >
+              <RotateCw className={styles.skipForwardButtonIcon} />
+            </button>
+          </div>
 
-        {/* 右側：時間表示とミュート */}
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-medium tabular-nums min-w-[80px] text-center text-gray-300">
-            {formatTime(currentTime)} / {formatTime(duration)}
-          </span>
+          {/* 右側：時間表示とミュート */}
+          <div className={styles.controlsRight}>
+            <span className={styles.time}>
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
 
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onClick={toggleMute}
-            aria-label={isMuted ? 'ミュート解除' : 'ミュート'}
-          >
-            {isMuted ? (
-              <VolumeX className="w-5 h-5 text-red-500" />
-            ) : (
-              <Volume2 className="w-5 h-5 text-gray-200" />
-            )}
-          </button>
+            <button
+              type="button"
+              className={styles.muteButton}
+              onClick={toggleMute}
+              aria-label={isMuted ? 'ミュート解除' : 'ミュート'}
+            >
+              {isMuted ? (
+                <VolumeX className={styles.muteButtonIconX} />
+              ) : (
+                <Volume2 className={styles.muteButtonIcon2} />
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>
