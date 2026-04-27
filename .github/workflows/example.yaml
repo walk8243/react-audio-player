@@ -16,19 +16,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  checkout:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
   build-package:
     runs-on: ubuntu-latest
-    needs: checkout
     defaults:
       run:
         working-directory: package
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -38,51 +33,10 @@ jobs:
         run: npm ci
       - name: Build package
         run: npm run build
-
-  build-example:
-    runs-on: ubuntu-latest
-    needs: build-package
-    defaults:
-      run:
-        working-directory: example
-    steps:
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Pack package
+        run: npm pack
+      - uses: actions/upload-artifact@v7
         with:
-          node-version: "24"
-          cache: npm
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - name: Install deps for example
-        run: npm ci
-      - name: Build example site
-        run: npm run build
-      - name: Upload artifact for pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build-example
-    defaults:
-      run:
-        working-directory: example
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          name: npm-package
+          path: "**/*.tgz"
+          archive: false
