@@ -42,5 +42,5 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           name: npm-package
-          path: "*.tgz"
+          path: "package/*.tgz"
           archive: false
