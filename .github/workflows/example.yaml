@@ -21,8 +21,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: package
+      - run: cd package
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -39,8 +38,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: example
+      - run: cd example
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
