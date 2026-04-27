@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: "24"
           cache: npm
-        working-directory: ./package
+          cache-dependency-path: "./package/package-lock.json"
       - name: Install deps for package
         run: npm ci
       - name: Build package
