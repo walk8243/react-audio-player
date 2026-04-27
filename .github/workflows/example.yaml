@@ -32,6 +32,7 @@ jobs:
         with:
           node-version: "24"
           cache: npm
+        working-directory: ./package
       - name: Install deps for package
         run: npm ci
       - name: Build package
