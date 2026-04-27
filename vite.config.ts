@@ -5,9 +5,18 @@ import dts from 'vite-plugin-dts';
 export default {
 	build: {
 		lib: {
-			entry: './src/AudioPlayer.tsx',
+			entry: './src/index.ts',
 			formats: ['es', 'cjs'],
-			fileName: (format) => `AudioPlayer.${format}.js`,
+			fileName: (format) => format === 'es' ? 'index.mjs' : 'index.cjs',
+		},
+		rollupOptions: {
+			external: ['react', 'react-dom', 'react/jsx-runtime'],
+			output: {
+				globals: {
+					react: 'React',
+					'react-dom': 'ReactDOM'
+				}
+			}
 		}
 	},
 	plugins: [react(), dts()],

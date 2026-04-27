@@ -1,4 +1,7 @@
+"use client";
+
 import { AudioPlayer } from "@walk8243/react-audio-player";
+import "@walk8243/react-audio-player/styles.css";
 
 export default function Home() {
   return (
