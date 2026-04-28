@@ -39,11 +39,13 @@ jobs:
         run: npm run build
       - name: Pack package
         run: npm pack
-      - uses: actions/upload-artifact@v7
+      - id: upload-package
+        uses: actions/upload-artifact@v7
         with:
-          name: npm-package
           path: "package/*.tgz"
           archive: false
+    outputs:
+      package: ${{ steps.upload-package.outputs.artifact-id }}
 
   build-example-pages:
     needs: build-package
@@ -78,10 +80,10 @@ jobs:
       - name: Download package artifact
         uses: actions/download-artifact@v7
         with:
-          name: npm-package
+          artifact-ids: ${{ needs.build-package.outputs.package }}
       - name: Install package
         run: |
-          npm install *.tgz
+          npm install ../*.tgz
           cat package.json
           ls -al node_modules
       - name: Build example site
