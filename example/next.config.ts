@@ -1,7 +1,23 @@
 import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
-const nextConfig: NextConfig = {
-  transpilePackages: ["@walk8243/react-audio-player"],
+const createConfig = (phase: string, { defaultConfig }: { defaultConfig: NextConfig }): NextConfig => {
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      ...defaultConfig,
+      transpilePackages: ["@walk8243/react-audio-player"],
+      experimental: {},
+    };
+  }
+
+  return {
+    ...defaultConfig,
+    transpilePackages: ["@walk8243/react-audio-player"],
+    output: 'export',
+    basePath: '/react-audio-player',
+    trailingSlash: true,
+    experimental: {},
+  };
 };
 
-export default nextConfig;
+export default createConfig;
