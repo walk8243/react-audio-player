@@ -24,15 +24,16 @@ jobs:
           scope: "@walk8243"
           cache: npm
           cache-dependency-path: "./package/package-lock.json"
-      - name: Install deps for package
-        run: npm ci
-      - id: tag_version
+      - id: extract_tag_version
         name: Extract tag version
         run: |
-          echo "ref: $GITHUB_REF"
-          echo "ref_name: $GITHUB_REF_NAME"
-      # - name: Build package
-      #   run: npm run build
-      # - run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "tag_version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+      - name: Set package version
+        run: npm version --no-commit-hooks --no-git-tag-version ${{ steps.extract_tag_version.outputs.tag_version }}
+      - name: Install deps for package
+        run: npm ci
+      - name: Build package
+        run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
