@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react';
 import styles from './audio-player.module.css';
 
@@ -12,7 +12,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
   const ref = useRef<HTMLAudioElement>(null);
 
   // Audioタグのイベントをフックしつつ、親から渡されたハンドラも呼び出す
-  const { onTimeUpdate, onLoadedMetadata, onPlay, onPause, onVolumeChange, className, style, ...restProps } = props;
+  const { onTimeUpdate, onLoadedMetadata, onPlay, onPause, onVolumeChange, className, src, style, ...restProps } = props;
   if ('controls' in restProps) {
     delete restProps.controls;
   }
@@ -77,6 +77,13 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
+  useEffect(() => {
+    ref.current?.pause();
+    setIsPlaying(false);
+    setDuration(0);
+    setCurrentTime(0);
+  }, [src]);
+
   return (
     <div className={className} style={style}>
       <div className={styles.container}>
@@ -84,6 +91,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
         <audio
           ref={ref}
           controls={false}
+          src={src || undefined}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onPlay={handlePlay}
@@ -100,6 +108,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
               type="button"
               className={styles.skipBackButton}
               onClick={() => skipTime(-10)}
+              disabled={!src}
               aria-label="10秒巻き戻し"
             >
               <RotateCcw className={styles.skipBackButtonIcon} />
@@ -107,8 +116,9 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
 
             <button
               type="button"
-              className={styles.playButton}
+              className={isPlaying ? styles.pauseButton : styles.playButton}
               onClick={togglePlay}
+              disabled={!src}
               aria-label={isPlaying ? '一時停止' : '再生'}
             >
               {isPlaying ? (
@@ -122,6 +132,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
               type="button"
               className={styles.skipForwardButton}
               onClick={() => skipTime(10)}
+              disabled={!src}
               aria-label="10秒先送り"
             >
               <RotateCw className={styles.skipForwardButtonIcon} />

@@ -23,7 +23,7 @@ export default function Home() {
           <select
             className="w-full bg-transparent outline-none cursor-pointer"
             onChange={(e) => setAudioSrc(e.target.value)}>
-            <option value={undefined}>未選択</option>
+            <option value="">未選択</option>
             <option value="https://audios.ftcdn.net/03/53/73/13/48K_353731386.m4a">Free And Happy</option>
             <option value="https://audios.ftcdn.net/20/04/71/65/48K_2004716573.m4a">The Sands of Intrigue</option>
             <option value="https://audios.ftcdn.net/19/85/61/84/48K_1985618492.m4a">Endless Summer</option>

@@ -40,16 +40,38 @@
 	transition: all 0.2s ease-in-out;
 }
 
+.playButton:disabled {
+	cursor: not-allowed;
+	background-color: #334155;
+}
+
+.pauseButton {
+	composes: playButton;
+	outline-width: 4px;
+	outline-color: #64748b;
+	outline-style: solid;
+}
+
 .skipBackButton {
 	/* p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 */
 	padding: 8px;
 	border-radius: 50%;
+	cursor: pointer;
+}
+
+.skipBackButton:disabled {
+	cursor: not-allowed;
 }
 
 .skipForwardButton {
 	/* p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 */
 	padding: 8px;
 	border-radius: 50%;
+	cursor: pointer;
+}
+
+.skipForwardButton:disabled {
+	cursor: not-allowed;
 }
 
 .muteButton {
@@ -85,7 +107,7 @@
 .playButtonIcon {
 	/* w-6 h-6 text-white leading-none ml-1 */
 	composes: pauseButtonIcon;
-	margin-left: 4px;
+	transform: translateX(1px);
 }
 
 .skipBackButtonIcon {
