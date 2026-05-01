@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "lint": "eslint"
+    "lint": "eslint",
+    "update:package": "npm update @walk8243/react-audio-player"
   },
   "dependencies": {
     "@walk8243/react-audio-player": "file:../package",

@@ -28,7 +28,18 @@
 			"path": "example",
 			"problemMatcher": [],
 			"label": "npm: dev - example",
-			"detail": "next dev"
+			"detail": "next dev",
+			"dependsOn": [
+				"npm: update - example"
+			]
+		},
+		{
+			"type": "npm",
+			"script": "update:package",
+			"path": "example",
+			"problemMatcher": [],
+			"label": "npm: update - example",
+			"detail": "npm update @walk8243/react-audio-player"
 		}
 	]
 }
