@@ -5,6 +5,9 @@ const createConfig = (phase: string, { defaultConfig }: { defaultConfig: NextCon
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       ...defaultConfig,
+      logging: {
+        browserToTerminal: true,
+      },
       transpilePackages: ["@walk8243/react-audio-player"],
       experimental: {},
     };

@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react';
 import styles from './audio-player.module.css';
 
-export interface AudioPlayerProps extends React.AudioHTMLAttributes<HTMLAudioElement> {
+export interface AudioPlayerProps extends Omit<React.AudioHTMLAttributes<HTMLAudioElement>, 'controls'> {
   // カスタムプロパティが必要な場合はここに追加します
 }
 
@@ -13,6 +13,9 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
 
   // Audioタグのイベントをフックしつつ、親から渡されたハンドラも呼び出す
   const { onTimeUpdate, onLoadedMetadata, onPlay, onPause, onVolumeChange, className, style, ...restProps } = props;
+  if ('controls' in restProps) {
+    delete restProps.controls;
+  }
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -34,7 +37,9 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
   };
 
   const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLAudioElement>) => {
-    setDuration(e.currentTarget.duration);
+    if (ref.current) {
+      setDuration(ref.current.duration);
+    }
     if (onLoadedMetadata) onLoadedMetadata(e);
   };
 
@@ -78,6 +83,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
         {/* 実体のaudioタグ（画面には表示しない） */}
         <audio
           ref={ref}
+          controls={false}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onPlay={handlePlay}
@@ -115,8 +121,8 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
             <button
               type="button"
               className={styles.skipForwardButton}
-              onClick={() => skipTime(30)}
-              aria-label="30秒先送り"
+              onClick={() => skipTime(10)}
+              aria-label="10秒先送り"
             >
               <RotateCw className={styles.skipForwardButtonIcon} />
             </button>
