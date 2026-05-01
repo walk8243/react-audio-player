@@ -100,6 +100,11 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
           {...restProps}
         />
 
+        {/* 進捗バー */}
+        <div className={styles.progressBar}>
+          <div className={styles.progress} style={{ width: `${currentTime / duration * 100}%` }}></div>
+        </div>
+
         {/* コントローラ */}
         <div className={styles.controls}>
           {/* 左側：再生コントロール */}

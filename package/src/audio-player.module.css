@@ -4,17 +4,31 @@
 	gap: 8px;
 	width: 100%;
 	min-width: 332px;
-	padding: 16px;
 	background-color: #1f2937;
 	color: #f9fafb;
 	border-radius: 8px;
+	overflow: hidden;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.progressBar {
+	height: 4px;
+	background-color: #64748b;
+}
+
+.progress {
+	height: 100%;
+	width: 0;
+	background-color: #1d4ed8;
+	border-right: 4px solid #f1f5f9;
+	transition: width 0.5s linear;
 }
 
 .controls {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 16px;
 }
 
 .controlsLeft {
