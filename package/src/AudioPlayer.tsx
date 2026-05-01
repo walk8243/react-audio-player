@@ -112,6 +112,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
               aria-label="10秒巻き戻し"
             >
               <RotateCcw className={styles.skipBackButtonIcon} />
+              <span className={styles.skipBackButtonText}>10</span>
             </button>
 
             <button
@@ -136,6 +137,7 @@ export const AudioPlayer = (props: AudioPlayerProps) => {
               aria-label="10秒先送り"
             >
               <RotateCw className={styles.skipForwardButtonIcon} />
+              <span className={styles.skipForwardButtonText}>10</span>
             </button>
           </div>
 

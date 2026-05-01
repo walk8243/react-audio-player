@@ -52,26 +52,24 @@
 	outline-style: solid;
 }
 
-.skipBackButton {
+.skipButton {
 	/* p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 */
+	position: relative;
 	padding: 8px;
 	border-radius: 50%;
 	cursor: pointer;
 }
 
-.skipBackButton:disabled {
+.skipButton:disabled {
 	cursor: not-allowed;
+}
+
+.skipBackButton {
+	composes: skipButton;
 }
 
 .skipForwardButton {
-	/* p-2 hover:bg-gray-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 */
-	padding: 8px;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-.skipForwardButton:disabled {
-	cursor: not-allowed;
+	composes: skipButton;
 }
 
 .muteButton {
@@ -118,6 +116,24 @@
 .skipForwardButtonIcon {
 	/* w-5 h-5 */
 	composes: controlButtonIcon;
+}
+
+.skipButtonText {
+	position: absolute;
+	bottom: 6px;
+	font-size: 12px;
+	line-height: 1em;
+	background-color: #1f2937;
+}
+
+.skipBackButtonText {
+	composes: skipButtonText;
+	left: 6px;
+}
+
+.skipForwardButtonText {
+	composes: skipButtonText;
+	right: 6px;
 }
 
 .muteButtonIconX {
