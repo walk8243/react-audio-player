@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Custom properties for AudioPlayer */
+  --audio-player-main-color: var(--color-violet-600);
+  --audio-player-text-color: var(--color-gray-950);
+  --audio-player-sub-text-color: var(--color-gray-700);
+  --audio-player-bg-color: var(--color-slate-50);
 }
 
 @theme inline {
@@ -16,6 +22,11 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Custom properties for AudioPlayer */
+    --audio-player-text-color: var(--color-gray-50);
+    --audio-player-sub-text-color: var(--color-gray-400);
+    --audio-player-bg-color: var(--color-slate-800);
   }
 }
 

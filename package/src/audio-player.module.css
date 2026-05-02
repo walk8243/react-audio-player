@@ -4,8 +4,8 @@
 	gap: 8px;
 	width: 100%;
 	min-width: 332px;
-	background-color: #1f2937;
-	color: #f9fafb;
+	background-color: var(--audio-player-bg-color, #1f2937);
+	color: var(--audio-player-text-color, #f9fafb);
 	border-radius: 8px;
 	overflow: hidden;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -19,7 +19,7 @@
 .progress {
 	height: 100%;
 	width: 0;
-	background-color: #1d4ed8;
+	background-color: var(--audio-player-main-color, #2563eb);
 	border-right: 4px solid #f1f5f9;
 	transition: width 0.5s linear;
 }
@@ -47,7 +47,7 @@
 	/* p-3 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 */
 	padding: 12px;
 	border-radius: 50%;
-	background-color: #2563eb;
+	background-color: var(--audio-player-main-color, #2563eb);
 	color: #ffffff;
 	border: none;
 	cursor: pointer;
@@ -100,7 +100,7 @@
 	font-variant-numeric: tabular-nums;
 	min-width: 80px;
 	text-align: center;
-	color: #9ca3af;
+	color: var(--audio-player-sub-text-color, #9ca3af);
 }
 
 .controlButtonIcon {
@@ -113,7 +113,6 @@
 	/* w-6 h-6 text-white leading-none */
 	width: 24px;
 	height: 24px;
-	color: #ffffff;
 }
 
 .playButtonIcon {
@@ -137,7 +136,7 @@
 	bottom: 6px;
 	font-size: 12px;
 	line-height: 1em;
-	background-color: #1f2937;
+	background-color: var(--audio-player-bg-color, #1f2937);
 }
 
 .skipBackButtonText {
